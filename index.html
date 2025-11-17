@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FluxBoard — Kanban Simples</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="topbar">
+    <h1>FluxBoard</h1>
+    <div class="top-controls">
+      <input id="userName" placeholder="Seu nome (identificador)" />
+      <button id="btnNewCard">+ Nova Demanda</button>
+      <button id="btnExport">Exportar (JSON)</button>
+      <button id="btnImport">Importar</button>
+      <button id="btnBatch">Avançar em Lote</button>
+    </div>
+  </div>
+
+  <main>
+    <section id="finalized" class="finalized">
+      <strong>✅ Bônus 100% Finalizados:</strong>
+      <span id="completedBonuses">Nenhum</span>
+    </section>
+
+    <div id="board" class="board">
+      <!-- Colunas serão geradas via JS -->
+    </div>
+  </main>
+
+  <!-- Modal simples -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <h3 id="modalTitle">Nova Demanda</h3>
+      <form id="modalForm">
+        <label>Descrição / Nome do produto
+          <input id="m_name" required />
+        </label>
+        <label>Código do Bônus (7 dígitos)
+          <input id="m_bonus" pattern="\\d{7}" />
+        </label>
+        <label>Código do Produto (6 dígitos)
+          <input id="m_code" pattern="\\b\\d{6}\\b" />
+        </label>
+        <label>Endereço de Entrega (opcional)
+          <input id="m_address" />
+        </label>
+        <label>URL da Imagem (opcional)
+          <input id="m_image" />
+        </label>
+        <div class="modal-actions">
+          <button type="button" id="modalCancel">Cancelar</button>
+          <button type="submit" id="modalSave">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Import / Batch prompt -->
+  <div id="prompt" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="promptTitle">Importar / Lote</h3>
+      <textarea id="promptInput" rows="6" placeholder="Cole JSON para importar ou códigos separados por espaços para avançar (ex: 277322 277324)"></textarea>
+      <div class="modal-actions">
+        <button id="promptCancel" type="button">Fechar</button>
+        <button id="promptAction" type="button">Executar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
